@@ -20,19 +20,34 @@ npx vitest run src/app/app.spec.ts
 
 **Angular 21.2 standalone project** — no NgModule. Every component is standalone and imported directly.
 
-- `src/main.ts` — bootstraps the `App` component with `appConfig`
-- `src/app/app.config.ts` — global providers (router, error listeners)
-- `src/app/app.routes.ts` — route definitions (currently empty, ready to extend)
-- `src/app/app.ts` — root component using Angular signals for reactive state
+### Bootstrap flow
 
-**AG Grid** (`ag-grid-angular` v35.2.1) is installed but not yet wired up. When adding grid components, import `AgGridAngular` directly into the standalone component's `imports` array — no module registration needed.
+`src/main.ts` bootstraps `LayoutComponent` (not `App`) with `appConfig`. `LayoutComponent` is the persistent shell — it renders the fixed sidebar and a `<router-outlet>`. Routed page components are loaded lazily into the outlet.
 
-**Testing** uses Vitest (not Karma/Jasmine). Test files follow the `*.spec.ts` convention.
+### Layout shell
 
-**Formatting** is handled by Prettier (100-char print width, single quotes, Angular HTML parser). Run `npx prettier --write .` to format.
+- `src/app/layout/layout.component.ts` — root shell; `position: fixed` sidebar on the left, scrollable content area offset by `margin-left: 220px`
+- `src/app/layout/sidebar/sidebar.component.ts` — fixed-position sidebar using `RouterLink` / `RouterLinkActive`
+- `src/app/layout/sidebar/nav-items.ts` — `NAV_ITEMS` array; **add new routes here** to surface them in the sidebar
 
-## Key Conventions
+### Routing
+
+`src/app/app.routes.ts` uses lazy `loadComponent`. `''` redirects to `home`. `App` (the AG Grid demo component) is the `/home` route.
+
+To add a new page: create a standalone component, add a `loadComponent` entry in `app.routes.ts`, and add a matching `NavItem` in `nav-items.ts`.
+
+### AG Grid
+
+`ag-grid-angular` v35.2.1. `ModuleRegistry.registerModules([AllCommunityModule])` is called once at the top of `src/app/app.ts`. Import `AgGridAngular` directly into any standalone component's `imports` array — no module registration needed per component.
+
+### Data models
+
+`src/app/model/` holds TypeScript interfaces (`IOlympicData`, `SalesRecord`) for grid row shapes.
+
+### Key conventions
 
 - Use Angular signals (`signal()`, `computed()`, `effect()`) for reactive state rather than RxJS where possible.
 - Component selector prefix is `app-` (enforced by `angular.json`).
-- Production budget limits: 500 kB warning / 1 MB error for initial bundle; keep AG Grid column definitions and data out of the root bundle if the app grows.
+- **Testing** uses Vitest (not Karma/Jasmine). Test files follow `*.spec.ts`.
+- **Formatting**: Prettier (100-char print width, single quotes, Angular HTML parser). Run `npx prettier --write src/` after changes.
+- Production bundle budget: 500 kB warning / 1 MB error. Keep AG Grid column definitions and row data out of eagerly loaded modules.

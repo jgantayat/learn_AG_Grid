@@ -3,31 +3,33 @@
 <h3>Column Definitions</h3>
 
 <div style="height: 100%; box-sizing: border-box">
-    <ag-grid-angular
-      style="height: 500px;"
-      [columnDefs]="columnDefs"
-      [rowData]="rowData"
-      (gridReady)="onGridReady($event)"/>
-  </div> 
+  <ag-grid-angular
+    style="height: 500px"
+    [columnDefs]="columnDefs"
+    [rowData]="rowData"
+    (gridReady)="onGridReady($event)"
+  />
+</div>
 
-  <h3>Column Defaults</h3>
+<h3>Column Defaults</h3>
 
-  <div style="height: 100%; box-sizing: border-box">
-    <ag-grid-angular
-      style="height: 500px;"
-      [defaultColDef]="defaultColDef"
-      [columnDefs]="columnDefs"
-      [rowData]="rowData"
-      (gridReady)="onGridReady($event)"/>
-  </div> 
+<div style="height: 100%; box-sizing: border-box">
+  <ag-grid-angular
+    style="height: 500px"
+    [defaultColDef]="defaultColDef"
+    [columnDefs]="columnDefs"
+    [rowData]="rowData"
+    (gridReady)="onGridReady($event)"
+  />
+</div>
 
 <h3>Column Data Types</h3>
 
 <div style="height: 100%; box-sizing: border-box">
-    <ag-grid-angular
-      style="height: 500px;"
-      [columnTypes]="columnTypesDef"
-      [columnDefs]="columnDataDefs"
-      [rowData]="rowDataDefs"
-    />
-  </div> 
+  <ag-grid-angular
+    style="height: 500px"
+    [columnTypes]="columnTypesDef"
+    [columnDefs]="columnDataDefs"
+    [rowData]="rowDataDefs"
+  />
+</div>
