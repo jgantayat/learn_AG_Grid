@@ -1,0 +1,13 @@
+<div class="concept-container">
+  <h2>Basic Grid</h2>
+  <p class="description">
+    A minimal AG Grid setup: define <code>rowData</code> and <code>columnDefs</code>, bind them to
+    <code>&lt;ag-grid-angular&gt;</code>, and the grid renders immediately with no extra
+    configuration.
+  </p>
+  <ag-grid-angular
+    style="width: 100%; height: 400px"
+    [rowData]="rowData()"
+    [columnDefs]="colDefs()"
+  />
+</div>

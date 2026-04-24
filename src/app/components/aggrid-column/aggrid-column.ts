@@ -1,22 +1,20 @@
 import { IOlympicData } from './../../model/iolympic-data';
-import { Component } from '@angular/core';
+import { Component, DestroyRef, inject } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { HttpClient } from '@angular/common/http';
 import { AgGridAngular } from 'ag-grid-angular';
 import { SalesRecord } from '../../model/sales-record';
 import {
   ClientSideRowModelModule,
   ColDef,
-  ColGroupDef,
   ColTypeDefs,
-  GridApi,
-  GridOptions,
   GridReadyEvent,
   ModuleRegistry,
-  ValidationModule,
   ValueFormatterParams,
 } from 'ag-grid-community';
 
 ModuleRegistry.registerModules([ClientSideRowModelModule]);
+
 @Component({
   selector: 'app-aggrid-column',
   imports: [AgGridAngular],
@@ -24,6 +22,11 @@ ModuleRegistry.registerModules([ClientSideRowModelModule]);
   styleUrl: './aggrid-column.css',
 })
 export class AggridColumn {
+  private http = inject(HttpClient);
+  private destroyRef = inject(DestroyRef);
+  // guard so only the first gridReady fires the HTTP call
+  private dataLoaded = false;
+
   defaultColDef: ColDef = {
     width: 150,
     cellStyle: { fontWeight: 'bold' },
@@ -37,15 +40,13 @@ export class AggridColumn {
       valueFormatter: currencyFormatter,
     },
     shaded: {
-      cellClass: 'shaded-class', //thjis shadding .css class property class is not working, need to check ag-grid documentation for this issue
+      cellClass: 'shaded-class',
     },
   };
 
   columnDataDefs: ColDef[] = [
     { field: 'productName' },
-    // uses properties from currency type
     { field: 'boughtPrice', type: 'currency' },
-    // uses properties from currency AND shaded types
     { field: 'soldPrice', type: ['currency', 'shaded'] },
   ];
 
@@ -57,11 +58,13 @@ export class AggridColumn {
 
   rowData: IOlympicData[] = [];
 
-  constructor(private http: HttpClient) {}
+  onGridReady(_params: GridReadyEvent<IOlympicData>) {
+    if (this.dataLoaded) return;
+    this.dataLoaded = true;
 
-  onGridReady(params: GridReadyEvent<IOlympicData>) {
     this.http
       .get<IOlympicData[]>('https://www.ag-grid.com/example-assets/olympic-winners.json')
+      .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((data) => (this.rowData = data));
   }
 }

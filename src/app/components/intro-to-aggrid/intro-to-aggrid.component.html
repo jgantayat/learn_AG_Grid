@@ -1,0 +1,67 @@
+<div class="page">
+  <h1>Intro to AG Grid</h1>
+  <p class="subtitle">
+    A first look at AG Grid in Angular — row data, column definitions, sorting, filtering, and cell
+    renderers.
+  </p>
+
+  <div class="learn-box">
+    <div class="learn-box-header">
+      <span class="learn-icon">🎓</span>
+      <strong>What you'll learn on this page</strong>
+    </div>
+    <ul class="learn-list">
+      <li>
+        <span class="tag">rowData</span>
+        Supply static arrays as grid data — each object maps to one row
+      </li>
+      <li>
+        <span class="tag">ColDef</span>
+        Define columns with <code>field</code>, <code>headerName</code>, and display options
+      </li>
+      <li>
+        <span class="tag">sortable</span>
+        Enable per-column sorting with a single boolean flag
+      </li>
+      <li>
+        <span class="tag">filter</span>
+        Add text filters (<code>filter: true</code>) or typed filters
+        (<code>agNumberColumnFilter</code>)
+      </li>
+      <li>
+        <span class="tag">valueFormatter</span>
+        Transform raw values for display without changing the underlying data
+      </li>
+      <li>
+        <span class="tag">cellRenderer</span>
+        Render custom content in a cell — e.g. booleans as emoji icons
+      </li>
+      <li>
+        <span class="tag">defaultColDef</span>
+        Set shared column properties (width, style) that apply to every column
+      </li>
+      <li>
+        <span class="tag">GridReadyEvent</span>
+        Load remote data via <code>HttpClient</code> once the grid is initialised
+      </li>
+      <li>
+        <span class="tag">ColTypeDefs</span>
+        Define reusable column types and apply them with the <code>type</code> property
+      </li>
+      <li>
+        <span class="tag">cellClass</span>
+        Apply CSS class names to cells for custom row-level styling
+      </li>
+    </ul>
+  </div>
+
+  <h2>Basic Example</h2>
+  <ag-grid-angular
+    style="height: 200px"
+    class="ag-theme-alpine"
+    [rowData]="rowData"
+    [columnDefs]="colDefs"
+  />
+
+  <app-aggrid-column />
+</div>
