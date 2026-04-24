@@ -1,6 +1,6 @@
 import { Component, signal } from '@angular/core';
 import { AgGridAngular } from 'ag-grid-angular';
-import type { ColDef } from 'ag-grid-community';
+import type { AutoSizeStrategy, ColDef } from 'ag-grid-community';
 import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
 
 ModuleRegistry.registerModules([AllCommunityModule]);
@@ -13,6 +13,9 @@ ModuleRegistry.registerModules([AllCommunityModule]);
   styleUrl: './basic-grid.component.css',
 })
 export class BasicGridComponent {
+     autoSizeStrategy: AutoSizeStrategy = {
+        type: "fitGridWidth",
+      };
   rowData = signal([
     { name: 'Alice Johnson', department: 'Engineering', salary: 95000, fullTime: true },
     { name: 'Bob Smith', department: 'Design', salary: 78000, fullTime: true },

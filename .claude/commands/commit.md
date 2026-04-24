@@ -36,7 +36,7 @@ Derive a short kebab-case branch name from the changes observed. Use one of thes
 
 | Prefix | When to use |
 |--------|-------------|
-| `feat/` | New AG Grid concept component, new sidebar route, new layout |
+| `feat/` | New AG Grid concept component, new navbar route, new layout |
 | `fix/` | Bug fix in a component, route, or grid config |
 | `refactor/` | Restructuring existing components or layout without behaviour change |
 | `style/` | CSS / Prettier formatting changes only |
@@ -114,10 +114,10 @@ Lazy-loaded via app.routes.ts and registered in NAV_ITEMS.
 ```
 
 ```
-✨ feat: scaffold sidebar layout with home route
+✨ feat: scaffold navbar layout with home route
 
 Moves existing AppComponent content to HomeComponent under the /home route.
-Adds SidebarComponent with NAV_ITEMS config and RouterLinkActive highlighting.
+Adds NavbarComponent with NAV_ITEMS config and RouterLinkActive highlighting.
 ```
 
 ```

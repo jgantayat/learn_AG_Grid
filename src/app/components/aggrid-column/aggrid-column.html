@@ -5,6 +5,7 @@
 <div style="height: 100%; box-sizing: border-box">
   <ag-grid-angular
     style="height: 500px"
+    [autoSizeStrategy]="autoSizeStrategy"
     [columnDefs]="columnDefs"
     [rowData]="rowData"
     (gridReady)="onGridReady($event)"
@@ -16,6 +17,7 @@
 <div style="height: 100%; box-sizing: border-box">
   <ag-grid-angular
     style="height: 500px"
+    [autoSizeStrategy]="autoSizeStrategy"
     [defaultColDef]="defaultColDef"
     [columnDefs]="columnDefs"
     [rowData]="rowData"
@@ -27,7 +29,8 @@
 
 <div style="height: 100%; box-sizing: border-box">
   <ag-grid-angular
-    style="height: 500px"
+    style="height: 400px"
+    [autoSizeStrategy]="autoSizeStrategy"
     [columnTypes]="columnTypesDef"
     [columnDefs]="columnDataDefs"
     [rowData]="rowDataDefs"
