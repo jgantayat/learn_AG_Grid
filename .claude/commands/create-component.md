@@ -32,7 +32,7 @@ Run these commands first so you have full context:
 
 ```bash
 cat src/app/app.routes.ts
-cat src/app/layout/sidebar/nav-items.ts
+cat src/app/components/navbar/nav-items.ts
 ls src/app/components/
 ```
 
@@ -52,7 +52,7 @@ From `<ComponentName>`, derive:
 | `kebab-case-name` | `cell-renderers` |
 | `ComponentName` (PascalCase) | `CellRenderers` |
 | `short-nav-label` | `"Cell Renderers"` (from arg, or humanise PascalCase if omitted) |
-| CLI target path | `components/<kebab-case-name>/<kebab-case-name>` |
+| CLI target path | `components/<kebab-case-name>` |
 
 ---
 
@@ -61,16 +61,16 @@ From `<ComponentName>`, derive:
 Run the Angular CLI generator. This is the **only** way to create component files — do not create `.ts`, `.html`, or `.css` files manually.
 
 ```bash
-ng g c components/<kebab-case-name>/<kebab-case-name>
+ng g c components/<kebab-case-name>
 ```
 
 This will generate exactly four files:
 
 ```
-CREATE src/app/components/<kebab-case-name>/<kebab-case-name>.css      (0 bytes)
-CREATE src/app/components/<kebab-case-name>/<kebab-case-name>.spec.ts  (531 bytes)
-CREATE src/app/components/<kebab-case-name>/<kebab-case-name>.ts       (186 bytes)
-CREATE src/app/components/<kebab-case-name>/<kebab-case-name>.html     (21 bytes)
+CREATE src/app/components/<kebab-case-name>.css      (0 bytes)
+CREATE src/app/components/<kebab-case-name>.spec.ts  (531 bytes)
+CREATE src/app/components/<kebab-case-name>.ts       (186 bytes)
+CREATE src/app/components/<kebab-case-name>.html     (21 bytes)
 ```
 
 Confirm all four files were created before proceeding. If the CLI errors, stop and report the error.
@@ -93,7 +93,6 @@ ModuleRegistry.registerModules([AllCommunityModule]);
 
 @Component({
   selector: 'app-<kebab-case-name>',
-  standalone: true,
   imports: [AgGridAngular],
   templateUrl: './<kebab-case-name>.html',
   styleUrl: './<kebab-case-name>.css',
@@ -158,7 +157,7 @@ Open `src/app/app.routes.ts` and add this entry to the `routes` array:
 {
   path: '<kebab-case-name>',
   loadComponent: () =>
-    import('./components/<kebab-case-name>/<kebab-case-name>')
+    import('./components/<kebab-case-name>')
       .then(m => m.<ComponentName>Component),
 },
 ```
@@ -167,13 +166,13 @@ Open `src/app/app.routes.ts` and add this entry to the `routes` array:
 - Preserve every existing route — never remove or reorder them
 - Add the new route at the end of the array
 - Never touch the `{ path: '', redirectTo: 'home', pathMatch: 'full' }` redirect
-- Never touch the `home` route pointing to `App`
+- Never touch the `home` route pointing to `HomeComponent`
 
 ---
 
-## Step 7 — Add to sidebar nav
+## Step 7 — Add to navbar nav
 
-Open `src/app/layout/sidebar/nav-items.ts` and append to the `NAV_ITEMS` array:
+Open `src/app/components/navbar/nav-items.ts` and append to the `NAV_ITEMS` array:
 
 ```typescript
 { path: '<kebab-case-name>', label: '<short-nav-label>' },
@@ -191,7 +190,7 @@ Open `src/app/layout/sidebar/nav-items.ts` and append to the `NAV_ITEMS` array:
 ```bash
 npx prettier --write src/app/components/<kebab-case-name>/
 npx prettier --write src/app/app.routes.ts
-npx prettier --write src/app/layout/sidebar/nav-items.ts
+npx prettier --write src/app/components/navbar/nav-items.ts
 ```
 
 ---

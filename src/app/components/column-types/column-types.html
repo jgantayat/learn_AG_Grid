@@ -1,0 +1,25 @@
+<div class="concept-container">
+  <h2>Column Types in AG Grid</h2>
+  <p class="description">
+    Column types let you define reusable column configurations — formatting, filtering, width, and
+    sorting rules — once and apply them to many columns via the <code>type</code> property. This
+    grid uses three custom types: <code>currency</code>, <code>percentage</code>, and
+    <code>label</code>.
+  </p>
+  <ag-grid-angular
+    style="width: 100%; height: 300px"
+    [autoSizeStrategy]="autoSizeStrategy"
+    [rowData]="rowData()"
+    [columnDefs]="colDefs()"
+    [columnTypes]="columnTypes"
+  />
+
+  <h2>Provided Column Types</h2>
+
+    <ag-grid-angular
+    style="width: 100%; height: 400px"
+    [autoSizeStrategy]="autoSizeStrategy"
+    [rowData]="engineerRowData()"
+    [columnDefs]="engineerColDefs()"
+  />
+</div>

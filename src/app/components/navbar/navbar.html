@@ -1,0 +1,8 @@
+<aside class="sidebar">
+  <div class="sidebar-heading">LEARN_AG_GRID</div>
+  <nav>
+    @for (item of navItems; track item.path) {
+      <a [routerLink]="item.path" routerLinkActive="active">{{ item.label }}</a>
+    }
+  </nav>
+</aside>

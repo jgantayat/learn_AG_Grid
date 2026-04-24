@@ -1,0 +1,122 @@
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">Angular 21 · AG Grid v35</div>
+    <h1 class="hero-title">Learn AG Grid</h1>
+    <p class="hero-subtitle">
+      A hands-on reference for building high-performance data grids with Angular. Explore concepts,
+      copy-paste examples, and ship faster.
+    </p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" routerLink="/intro-to-aggrid">Get Started →</a>
+      <a class="btn btn-ghost" routerLink="/basic-grid">Basic Grid →</a>
+    </div>
+  </div>
+</section>
+
+<!-- Quick Start -->
+<section class="section">
+  <div class="section-inner">
+    <h2 class="section-title">Quick Start</h2>
+    <p class="section-subtitle">Get a grid running in under 2 minutes.</p>
+
+    <div class="code-block">
+      <div class="code-label">Install</div>
+      <pre><code>npm install ag-grid-angular ag-grid-community</code></pre>
+    </div>
+
+    <div class="code-block">
+      <div class="code-label">Component</div>
+      <pre><code><span class="c-keyword">import</span> &#123; Component, signal &#125; <span class="c-keyword">from</span> <span class="c-string">'&#64;angular/core'</span>;
+<span class="c-keyword">import</span> &#123; AgGridAngular &#125; <span class="c-keyword">from</span> <span class="c-string">'ag-grid-angular'</span>;
+<span class="c-keyword">import</span> &#123; AllCommunityModule, ModuleRegistry &#125; <span class="c-keyword">from</span> <span class="c-string">'ag-grid-community'</span>;
+
+ModuleRegistry.<span class="c-fn">registerModules</span>([AllCommunityModule]);
+
+<span class="c-decorator">&#64;Component</span>(&#123;
+  selector: <span class="c-string">'app-my-grid'</span>,
+  standalone: <span class="c-keyword">true</span>,
+  imports: [AgGridAngular],
+  template: <span class="c-string">`
+    &lt;ag-grid-angular
+      style="width: 100%; height: 400px;"
+      [rowData]="rowData()"
+      [columnDefs]="colDefs()"
+    /&gt;
+  `</span>,
+&#125;)
+<span class="c-keyword">export class</span> <span class="c-class">MyGridComponent</span> &#123;
+  rowData = <span class="c-fn">signal</span>([
+    &#123; make: <span class="c-string">'Tesla'</span>, model: <span class="c-string">'Model Y'</span>, price: 64950 &#125;,
+    &#123; make: <span class="c-string">'Ford'</span>,  model: <span class="c-string">'F-Series'</span>, price: 33850 &#125;,
+  ]);
+
+  colDefs = <span class="c-fn">signal</span>([
+    &#123; field: <span class="c-string">'make'</span> &#125;,
+    &#123; field: <span class="c-string">'model'</span> &#125;,
+    &#123; field: <span class="c-string">'price'</span> &#125;,
+  ]);
+&#125;</code></pre>
+    </div>
+  </div>
+</section>
+
+<!-- Best Practices -->
+<section class="section section-alt">
+  <div class="section-inner">
+    <h2 class="section-title">Best Practices</h2>
+    <p class="section-subtitle">Patterns that keep grids fast, maintainable, and bug-free.</p>
+
+    <div class="practices-grid">
+      <div class="practice-card">
+        <span class="practice-icon">⚡</span>
+        <h3>Use Signals</h3>
+        <p>
+          Prefer <code>signal()</code> for <code>rowData</code> and <code>colDefs</code> over plain
+          class properties — grids update reactively with no manual change detection.
+        </p>
+      </div>
+      <div class="practice-card">
+        <span class="practice-icon">📦</span>
+        <h3>Lazy Load Components</h3>
+        <p>
+          Load concept components via <code>loadComponent</code> in <code>app.routes.ts</code> to
+          keep the initial bundle small and only pay for what is visited.
+        </p>
+      </div>
+      <div class="practice-card">
+        <span class="practice-icon">🔧</span>
+        <h3>Register Modules Once</h3>
+        <p>
+          Call <code>ModuleRegistry.registerModules()</code> once per component file, at the top
+          level — not inside a lifecycle hook or constructor.
+        </p>
+      </div>
+      <div class="practice-card">
+        <span class="practice-icon">🔑</span>
+        <h3>Define Row IDs</h3>
+        <p>
+          Set <code>getRowId</code> for large or frequently-updated datasets. AG Grid uses it to
+          efficiently apply delta row updates without re-rendering the full grid.
+        </p>
+      </div>
+      <div class="practice-card">
+        <span class="practice-icon">🎨</span>
+        <h3>Theme via CSS Class</h3>
+        <p>
+          Apply <code>ag-theme-alpine</code> or <code>ag-theme-quartz</code> via a CSS class on the
+          component element — never inline. This keeps theming overridable in global styles.
+        </p>
+      </div>
+      <div class="practice-card">
+        <span class="practice-icon">📐</span>
+        <h3>Fixed Grid Height</h3>
+        <p>
+          Always give the grid a fixed <code>px</code> or <code>%</code> height. Using
+          <code>height: auto</code> causes the grid to collapse — it needs a known height to render
+          its virtual rows.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>

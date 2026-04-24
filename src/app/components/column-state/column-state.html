@@ -1,0 +1,15 @@
+
+
+<div class="test-container">
+    <h2>Column State in AG Grid</h2>
+    <div class="test-header">
+      <button (click)="onBtSortAthlete()">Sort Athlete</button>
+      <button (click)="onBtClearAllSorting()">Clear All Sorting</button>
+    </div>
+    <ag-grid-angular
+      style="width: 100%; height: 400px;"
+      [columnDefs]="columnDefs"
+      [autoSizeStrategy]="autoSizeStrategy"
+      [rowData]="rowData"
+      (gridReady)="onGridReady($event)"
+    />

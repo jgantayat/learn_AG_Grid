@@ -1,0 +1,39 @@
+.concept-container {
+  padding: 24px;
+}
+
+h2 {
+  margin-bottom: 16px;
+}
+
+.test-container {
+  padding: 24px;
+}
+
+.test-header {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.test-header button {
+  padding: 8px 16px;
+  background: #111;
+  color: #fff;
+  border: 1px solid #333;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.test-header button:hover {
+  background: #333;
+  border-color: #555;
+}
+
+.test-header button:active {
+  background: #555;
+}

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { AgGridAngular } from 'ag-grid-angular';
-import type { ColDef } from 'ag-grid-community';
+import type { AutoSizeStrategy, ColDef } from 'ag-grid-community';
 import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
 import { AggridColumn } from '../aggrid-column/aggrid-column';
 
@@ -14,6 +14,9 @@ ModuleRegistry.registerModules([AllCommunityModule]);
   styleUrl: './intro-to-aggrid.component.css',
 })
 export class IntroToAggridComponent {
+     autoSizeStrategy: AutoSizeStrategy = {
+        type: "fitGridWidth",
+      };
   rowData = [
     { make: 'Tesla', model: 'Model Y', price: 64950, electric: true },
     { make: 'Ford', model: 'F-Series', price: 33850, electric: false },

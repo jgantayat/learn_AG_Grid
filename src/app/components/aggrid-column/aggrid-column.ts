@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { AgGridAngular } from 'ag-grid-angular';
 import { SalesRecord } from '../../model/sales-record';
 import {
+  AutoSizeStrategy,
   ClientSideRowModelModule,
   ColDef,
   ColTypeDefs,
@@ -43,6 +44,11 @@ export class AggridColumn {
       cellClass: 'shaded-class',
     },
   };
+
+     autoSizeStrategy: AutoSizeStrategy = {
+        type: "fitGridWidth",
+      };
+      
 
   columnDataDefs: ColDef[] = [
     { field: 'productName' },
